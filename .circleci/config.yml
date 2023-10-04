@@ -28,8 +28,8 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Show current branch
-         command: echo "Current branch is ${CURRENT_BRANCH}"
+          name: Show current branch
+          command: echo "Current branch is ${CURRENT_BRANCH}"
       - run:
           name: Installing AWS CLI
           working_directory: /
@@ -62,8 +62,8 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Show current branch
-         command: echo "Current branch is ${CURRENT_BRANCH}"
+          name: Show current branch
+          command: echo "Current branch is ${CURRENT_BRANCH}"
       - run:
           name: Installing AWS CLI
           working_directory: /
@@ -112,4 +112,3 @@ workflows:
                 - master
                 - staging
                 - dev
-```
