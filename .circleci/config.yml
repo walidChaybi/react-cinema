@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:13.8.0
     working_directory: ~/repo
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
           key: app-{{ checksum "package.json" }}
   deploy-to-aws-s3:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:13.8.0
     working_directory: ~/repo
     steps:
       - checkout
@@ -36,7 +36,7 @@ jobs:
           command: |
             sudo apt-get -y -qq update
             sudo apt-get install -y awscli
-            sudo apt-get install -y python3-pip python-dev build-essential
+            sudo apt-get install -y python-dev build-essential
       - run:
           name: Build project
           command: |
@@ -57,7 +57,7 @@ jobs:
             fi
   deploy-to-cloudfront:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:13.8.0
     working_directory: ~/repo
     steps:
       - checkout
@@ -70,7 +70,7 @@ jobs:
           command: |
             sudo apt-get -y -qq update
             sudo apt-get install awscli
-            sudo apt-get install -y python-pip python-dev build-essential
+            sudo apt-get install -y python-dev build-essential
       - run:
           name: Build project
           command: |
