@@ -47,7 +47,7 @@ jobs:
             echo "Build completed"
       - run:
           name: Deploy to AWS S3
-          command: aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-devvvv --delete
+          command: aws --region eu-central-1 s3 sync ~/repo/build s3://react-cinema-devvvv --delete
 
   deploy-to-cloudfront:
     docker:
