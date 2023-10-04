@@ -47,16 +47,8 @@ jobs:
             echo "Build completed"
       - run:
           name: Deploy to AWS S3
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]
-            then
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-prodddd --delete
-            elif [ "${CIRCLE_BRANCH}" == "staging" ]
-            then
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-stagingggg --delete
-            else
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-devvvv --delete
-            fi
+          command: aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-devvvv --delete
+
   deploy-to-cloudfront:
     docker:
       - image: cimg/node:13.8.0
