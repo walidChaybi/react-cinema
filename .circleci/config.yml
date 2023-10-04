@@ -77,8 +77,9 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get install -y python-pip python-dev build-essential
-            sudo apt-get install awscli
+            sudo apt-get install -y python3-pip python-dev build-essential
+            sudo apt-get install jq
+            sudo apt-get install -y awscli
       - run:
           name: Build project
           command: |
