@@ -26,18 +26,18 @@ jobs:
       - image: circleci/node:13.12.0
     working_directory: ~/repo
     steps:
-      -checkout
-      -run:
+      - checkout
+      - run:
           name: Show Current branch
           command: echo ${CIRCLE_BRANCH}
-      -run:
+      - run:
           name: Installing AWS CLI
           working_directory: /
           command: |
             sudo apt-get -y -qq update
             sudo apt-get -y awscli
             sudo apt-get install -y python-pip python-dev build-essential
-      -run: Build Project
+      - run: Build Project
           name: Build Project
           command: |
             npm install
@@ -45,7 +45,7 @@ jobs:
             cd build
             zip ../build.zip -r *.[^.]*
             echo "Build Completed"
-      -run:
+      - run:
           name: Deploy to S3
           command: |
             aws s3 cp build.zip s3://react-cinema-devvvv/build.zip
