@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Show CIRCLE branch
-          command: echo "CIRCLE branch is ${CIRCLE_BRANCH}"
+          command: echo "CIRCLE branch is ${CIRCLE_BRANCH} ${AWS_DEV_BUCKET}"
       - restore_cache:
           keys:
             - app-{{ checksum "package.json" }}
@@ -50,12 +50,12 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build/ s3://${AWS_PROD_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_PROD_BUCKET} --delete
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build/ s3://${AWS_STAGING_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_STAGING_BUCKET} --delete
             else
-              aws --region ${AWS_REGION} s3 sync ~/repo/build/ s3://${AWS_DEV_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_DEV_BUCKET} --delete
             fi
   deploy-to-cloudfront:
     docker:
