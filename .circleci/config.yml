@@ -49,11 +49,16 @@ jobs:
           name: access dir
           command: cd ~/repo
       - run:
-          name: Set AWS credentials
-          command: echo 'AWS_ACCESS_KEY_ID=AKIA2D7ORR5YNUYPXWPG' >> $BASH_ENV && echo 'AWS_SECRET_ACCESS_KEY=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' >> $BASH_ENV
+          name: Assume AWS IAM role
+          command: aws sts assume-role --role-arn "arn:aws:iam::695748104048:user/cinema" --role-session-name "CircleCI-Session" > assumed-credentials.json
+
       - run:
           name: Deploy to AWS S3
-          command: aws s3 sync ~/repo/build s3://react-cinema-devvvv --delete
+          command: aws s3 sync ~/repo/build s3://react-cinema-devvvv --delete -v
+          environment:
+            AWS_ACCESS_KEY_ID: $(cat assumed-credentials.json | jq -r .Credentials.AccessKeyId)
+            AWS_SECRET_ACCESS_KEY: $(cat assumed-credentials.json | jq -r .Credentials.SecretAccessKey)
+            AWS_SESSION_TOKEN: $(cat assumed-credentials.json | jq -r .Credentials.SessionToken)
 
   deploy-to-cloudfront:
     docker:
