@@ -53,7 +53,7 @@ jobs:
           command: echo 'AWS_ACCESS_KEY_ID=AKIA2D7ORR5YNUYPXWPG' >> $BASH_ENV && echo 'AWS_SECRET_ACCESS_KEY=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' >> $BASH_ENV
       - run:
           name: Deploy to AWS S3
-          command: aws s3 sync ~/repo/build s3://react-cinema-devvvv --delete -v
+          command: aws s3 sync ~/repo/build s3://react-cinema-devvvv --delete
 
   deploy-to-cloudfront:
     docker:
