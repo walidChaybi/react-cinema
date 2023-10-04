@@ -4,7 +4,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:16.17.0
-    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -24,7 +23,6 @@ jobs:
   deploy-to-aws-s3:
     docker:
       - image: cimg/node:16.17.0
-    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -47,12 +45,11 @@ jobs:
             echo "Build completed"
       - run:
           name: Deploy to AWS S3
-          command: aws s3 sync ~/repo/build s3://react-cinema-devvvv --delete
+          command: aws s3 sync ./app/build s3://react-cinema-devvvv --delete
 
   deploy-to-cloudfront:
     docker:
       - image: cimg/node:16.17.0
-    working_directory: ~/repo
     steps:
       - checkout
       - run:
