@@ -50,12 +50,12 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_PROD_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-prodddd --delete
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_STAGING_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-stagingggg --delete
             else
-              aws --region eu-central-1 s3 sync ~/repo/build/ s3://${AWS_DEV_BUCKET} --delete
+              aws --region eu-central-1 s3 sync ~/repo/build/ s3://react-cinema-devvvv --delete
             fi
   deploy-to-cloudfront:
     docker:
